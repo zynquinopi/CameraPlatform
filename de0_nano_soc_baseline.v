@@ -33,8 +33,8 @@
 //Users can enable any group by uncommenting the corresponding line below:
 //`define enable_ADC
 //`define enable_ARDUINO
-//`define enable_GPIO0
-//`define enable_GPIO1
+`define enable_GPIO0
+`define enable_GPIO1
 //`define enable_HPS
 
 module de0_nano_soc_baseline(
@@ -143,5 +143,22 @@ module de0_nano_soc_baseline(
 	/* 3.3-V LVTTL */
 	input				[3:0]			SW
 
+);
+
+VideoProcCore VideoProcCore_inst(
+	.CLK(FPGA_CLK_50),
+	.RST_N(1'b1),
+	.XCLK(GPIO_0[30]),
+	.CamHsync(GPIO_0[32]),
+	.CamVsync(GPIO_0[33]),
+	.PCLK(GPIO_0[31]),
+  	.CamData(GPIO_0[29:22]),
+	.VgaVsync(GPIO_1[27]),
+	.VgaHsync(GPIO_1[26]),
+	.SW0(1'b0),
+	.SW1(1'b0),
+   	.VgaDataR(GPIO_1[7:0]),
+   	.VgaDataG(GPIO_1[17:10]),
+   	.VgaDataB(GPIO_1[25:18])	
 );
 endmodule
